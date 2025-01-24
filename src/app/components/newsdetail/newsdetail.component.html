@@ -1,0 +1,26 @@
+<!-- Detay Sayfası -->
+<div *ngIf="article" class="flex flex-col gap-6">
+    <!-- Haber Görseli -->
+    <div class="relative">
+      <img [src]="article.image" class="w-full h-80 object-cover rounded-lg shadow-md" alt="Haber Resmi">
+      <div class="absolute bottom-0 left-0 bg-gradient-to-t from-black to-transparent w-full p-4 text-white text-lg font-semibold">
+        {{ article.subtitle }}
+      </div>
+    </div>
+  
+    <!-- Haber İçeriği -->
+    <div class="p-4">
+      <h1 class="text-4xl font-bold text-gray-900 leading-tight">{{ article.title }}</h1>
+      <p class="mt-6 text-lg text-gray-800 leading-relaxed">{{ article.description }}</p>
+    </div>
+  </div>
+  
+  <!-- Haber Bulunamadı Mesajı -->
+  <div *ngIf="!article" class="text-center mt-10">
+    <p class="text-2xl font-semibold text-red-600">🚨 Haber bulunamadı!</p>
+    <p class="text-gray-600 mt-2">Lütfen farklı bir haber seçmeyi deneyin.</p>
+    <a routerLink="/homenews" class="inline-block mt-4 px-6 py-2 bg-blue-500 text-white font-medium rounded-lg hover:bg-blue-600 transition">
+      Ana Sayfaya Dön
+    </a>
+  </div>
+  

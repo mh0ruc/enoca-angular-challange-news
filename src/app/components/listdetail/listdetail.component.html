@@ -1,0 +1,18 @@
+<div class="grid grid-cols-3 w-full gap-4">
+    <div *ngFor="let news of newsList" class="border rounded shadow-md relative group">
+      <!-- routerLink ile yönlendirme yapıyoruz -->
+      <a [routerLink]="['/news', news.id]" class="cursor-pointer">
+        <div>
+          <img [src]="news.image" class="rounded-t w-full h-48 object-cover transition-all duration-300 group-hover:blur-sm" alt="Haber Resmi">
+        </div>
+        <div class="mt-4 p-2">
+          <h2 class="text-xl font-semibold">{{ news.title }}</h2>
+        </div>
+  
+        <div class="absolute inset-0 flex h-48 items-center justify-center bg-black p-4 bg-opacity-50 text-white opacity-0 group-hover:opacity-100 transition-all duration-300">
+          <p class="text-center">{{ news.description }}</p>
+        </div>
+      </a>
+    </div>
+  </div>
+  

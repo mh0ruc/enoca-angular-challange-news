@@ -1,0 +1,35 @@
+<div class="relative w-full bg-white h-auto lg:h-96 flex items-center overflow-hidden">
+    <!-- Önceki Buton -->
+    <button (click)="prevSlide()"
+        class="absolute left-2 p-3 z-20   bg-gray-200 font-bold text-xl rounded opacity-75 hover:opacity-100 transition">
+        ❮
+    </button>
+
+    <!-- Slider İçeriği -->
+    <div class="w-full flex  lg:mb-4   transition-transform duration-500 ease-in-out"
+         [style.transform]="'translateX(' + (-currentIndex * 100) + '%)'">
+        <div  (click)="goToDetail(news)" *ngFor="let news of newsList; let i = index; trackBy: trackByFn"
+            class="px-6 lg:px-20  w-full shrink-0 flex flex-col lg:flex-row items-center gap-6">
+            
+            <!-- Resim Kısmı -->
+            <div class="w-full lg:w-1/2  flex items-center justify-center">
+                <img [src]="news.image" class="w-full sm:w-3/4 lg:w-96 h-auto max-h-80 object-cover rounded shadow-lg" alt="Haber Resmi">
+            </div>
+
+            <!-- İçerik Kısmı -->
+            <div class="flex flex-col gap-4 w-full lg:w-1/2  lg:text-left">
+                <div>
+                    <h2 class="text-2xl sm:text-3xl lg:text-4xl font-semibold">{{ news.title }}</h2>
+                    <h3 class="font-medium text-lg sm:text-xl lg:text-2xl opacity-50">{{ news.subtitle }}</h3>
+                </div>
+                <p class="text-gray-600 text-sm sm:text-base lg:text-lg">{{ news.description }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sonraki Buton -->
+    <button (click)="nextSlide()"
+        class="absolute right-2 p-3 z-20 bg-gray-200 font-bold rounded text-xl opacity-75 hover:opacity-100 transition">
+        ❯
+    </button>
+</div>

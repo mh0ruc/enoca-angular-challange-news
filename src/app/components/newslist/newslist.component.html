@@ -1,0 +1,54 @@
+<div class="w-full mb-6 text-center">
+  <p class="text-lg font-semibold text-gray-700">
+    Toplam <span class="text-blue-600">{{ totalNewsCount }}</span> haber bulundu. 
+    <span class="text-blue-600">{{ pagedNews.length }}</span> haber gösteriliyor.
+  </p>
+</div>
+
+<!-- Haber Kartları -->
+<div class="grid pb-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+  <div *ngFor="let news of pagedNews" class="border rounded shadow-lg overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl group bg-white">
+    <a (click)="goToDetail(news)" class="cursor-pointer block">
+      <!-- Haber Görseli -->
+      <div class="relative">
+        <img [src]="news.image" class="w-full h-56 object-cover transition-all duration-300 group-hover:blur-sm" alt="Haber Resmi">
+        <div class="absolute top-2 left-2 px-3 py-1 bg-gray-900 text-white text-sm font-semibold rounded">
+          {{ news.category | uppercase }} <!-- ✅ Kategori başlığını göster -->
+        </div>
+        <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white opacity-0 group-hover:opacity-100 transition-all duration-300 p-4 text-center">
+          <p>{{ news.description }}</p>
+        </div>
+      </div>
+
+      <!-- Haber Başlık ve İçerik -->
+      <div class="p-4">
+        <h2 class="text-lg font-bold text-gray-800 group-hover:text-blue-500 transition duration-300">
+          {{ news.title }}
+        </h2>
+      </div>
+    </a>
+  </div>
+</div>
+
+<!-- Sayfa Numaraları -->
+<div class="flex justify-center items-center gap-2 flex-wrap mt-6 pb-8">
+  <button *ngIf="currentPage > 1" (click)="goToPage(1)" class="px-4 py-2 bg-blue-500 text-white font-medium rounded hover:bg-blue-600 transition">
+    İlk
+  </button>
+  <button *ngIf="currentPage > 1" (click)="goToPage(currentPage - 1)" class="px-4 py-2 bg-blue-500 text-white font-medium rounded hover:bg-blue-600 transition">
+    ‹ Önceki
+  </button>
+
+  <button *ngFor="let page of pages" (click)="goToPage(page)" 
+    [ngClass]="{'bg-red-500 text-white': currentPage === page, 'bg-gray-200': currentPage !== page}" 
+    class="px-4 py-2 font-medium rounded hover:bg-gray-300 transition">
+    {{ page }}
+  </button>
+  <button *ngIf="currentPage < totalPages" (click)="goToPage(currentPage + 1)" class="px-4 py-2 bg-blue-500 text-white font-medium rounded hover:bg-blue-600 transition">
+    Sonraki ›
+  </button>
+  <button *ngIf="currentPage < totalPages" (click)="goToPage(totalPages)" class="px-4 py-2 bg-blue-500 text-white font-medium rounded hover:bg-blue-600 transition">
+    Son
+  </button>
+
+</div>
